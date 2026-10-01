@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LibTrack.App/LibTrack.App.csproj" />
+  <Project Path="LibTrack.Core/LibTrack.Core.csproj" />
+  <Project Path="LibTrack.Data.InMemory/LibTrack.Data.InMemory.csproj" />
+</Solution>
