@@ -10,6 +10,7 @@
     <ItemGroup>
       <ProjectReference Include="..\LibTrack.Core\LibTrack.Core.csproj" />
       <ProjectReference Include="..\LibTrack.Data.InMemory\LibTrack.Data.InMemory.csproj" />
+      <ProjectReference Include="..\LibTrack.Data.Sql\LibTrack.Data.Sql.csproj" />
     </ItemGroup>
 
     <ItemGroup>

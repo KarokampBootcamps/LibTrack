@@ -11,22 +11,26 @@ using LibTrack.Core.Entities;
 using LibTrack.Core.Exceptions;
 using LibTrack.Core.Interfaces;
 using LibTrack.Core.Services;
-using LibTrack.Data.InMemory.Repositories;
+using LibTrack.Data.Sql;
+using LibTrack.Data.Sql.Repositories;
 using Spectre.Console;
 
-IBookRepository bookRepo = new BookRepository();
-IMemberRepository memberRepo = new MemberRepository();
-ILoanRepository loanRepo = new LoanRepository();
+// In memory version
+// IBookRepository bookRepo = new BookRepository();
+// IMemberRepository memberRepo = new MemberRepository();
+// ILoanRepository loanRepo = new LoanRepository();
 
-// Session 3+: swap these three lines for the SQL versions —
-// nothing below this point changes.
-// IBookRepository bookRepo = new SqlBookRepository(connectionString!);
-// IMemberRepository memberRepo = new SqlMemberRepository(connectionString!);
-// ILoanRepository loanRepo = new SqlLoanRepository(connectionString!);
+// var libraryService = new LibraryService(bookRepo, memberRepo, loanRepo);
+
+// Sqlite version
+var dbPath = Path.Combine(AppContext.BaseDirectory, "library.db");
+var factory = SqlDataSetup.Initialize(dbPath);
+
+IBookRepository bookRepo = new SqlBookRepository(factory);
+IMemberRepository memberRepo = new SqlMemberRepository(factory);
+ILoanRepository loanRepo = new SqlLoanRepository(factory);
 
 var libraryService = new LibraryService(bookRepo, memberRepo, loanRepo);
-// libraryService.LoanOverdue += loan =>
-//     Console.WriteLine($"  [!] Loan #{loan.Id} is overdue (was due {loan.DueDate:d}).");
 
 // ---------- Menu loop ----------
 var running = true;
